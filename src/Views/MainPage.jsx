@@ -1,50 +1,30 @@
 import { useEffect, useState } from 'react';
-import { test } from '../Helper/Service';
-
+import { getStreamInfo } from '../Helper/Service';
+import { StreamerAvatar } from '../Components/Avatar/StreamerAvatar'
+import { StreamerStatus } from '../Components/Status/StreamerStatus'
+import { StreamerTitle } from '../Components/Title/StreamerTitle'
+import { StreamerHeader } from '../Components/Header/StreamerHeader'
 export const Mainpage =() =>{
-
-    // let example = {
-    //     "data": [
-    //         {
-    //             "broadcaster_language": "en",
-    //             "broadcaster_login": "a_seagull",
-    //             "display_name": "A_Seagull",
-    //             "game_id": "511224",
-    //             "id": "19070311",
-    //             "is_live": false,
-    //             "tag_ids": [],
-    //             "thumbnail_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/a_seagull-profile_image-4d2d235688c7dc66-300x300.png",
-    //             "title": "hey",
-    //             "started_at": ""
-    //         },
-    //         {
-    //             "broadcaster_language": "en",
-    //             "broadcaster_login": "fundamentally_a_seagull",
-    //             "display_name": "fundamentally_a_seagull",
-    //             "game_id": "509110",
-    //             "id": "438322552",
-    //             "is_live": false,
-    //             "tag_ids": [],
-    //             "thumbnail_url": "https://static-cdn.jtvnw.net/jtv_user_pictures/75f246a1-88c0-481b-9ccd-9f99eab6e944-profile_image-300x300.png",
-    //             "title": "The Rain Gets Riskier ",
-    //             "started_at": ""
-    //         }
-    //     ],
-    //     "pagination": {}
-    // }
-    const [info,setInfo] = useState();
+    const [info,setInfo] = useState([]);
+    const [loading,setLoading] = useState(true);
     useEffect(()=>{
-        test().then((response) =>{
+        getStreamInfo().then((response) =>{
             setInfo(response.data)
-            
+            setLoading(false)
 
         });
     },[]);
-   
-    console.log(info);
+    let filter =  info.filter((streamer) => streamer.id === '121059319')
+    //let status = filter[0].is_live === true ? 'En Vivo!' : 'Offline'
     return(
-        <div><p>Got items:</p>
-        
+        <div>
+            {!loading && (
+        <> <StreamerHeader header = {filter[0].display_name}></StreamerHeader>
+            <StreamerAvatar url = {filter[0].thumbnail_url}></StreamerAvatar>
+            <StreamerStatus status = {filter[0].is_live}></StreamerStatus>
+            <StreamerTitle title = {filter[0].title}></StreamerTitle>
+        </>
+            )}
         </div>
         
         

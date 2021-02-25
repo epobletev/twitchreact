@@ -1,3 +1,5 @@
 {
-    "endpoint": "https://api.mangadex.org/v2/"
+    "endpoint": "https://api.twitch.tv/helix/",
+    "clID":"niaeshvoa69syea1azomz6pa1toep2"
+
 }

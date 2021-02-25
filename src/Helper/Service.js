@@ -1,13 +1,14 @@
 const axios = require('axios');
-
-export const test = async () =>{
-    const clID = 'niaeshvoa69syea1azomz6pa1toep2'
-    const authTok = 'Bearer erkuyeynhezk2ss1w105sro4dwxlgb'
+const config = require('../Config/Config.json');
+const endpoint = config.endpoint
+const clientID = config.clID
+export const getStreamInfo = async () =>{
+    const authTok = 'Bearer lfbz5wh8hnrer1pcu251vntb2xsho0'
     try{
-        let data = await axios({
-                url:'https://api.twitch.tv/helix/search/channels?query=a_seagull',
+        let { data } = await axios({
+                url:`${endpoint}search/channels?query=moonmoon`,
                 method:'GET',
-                headers:{'Client-Id':clID,
+                headers:{'Client-Id':clientID,
                         'Authorization':authTok }
             });
             return data
