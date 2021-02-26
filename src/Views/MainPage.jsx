@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { getStreamInfo } from '../Helper/Service';
-import { StreamerAvatar } from '../Components/Avatar/StreamerAvatar'
-import { StreamerStatus } from '../Components/Status/StreamerStatus'
 import { StreamerTitle } from '../Components/Title/StreamerTitle'
-import { StreamerHeader } from '../Components/Header/StreamerHeader'
+import { StreamerVideo } from '../Components/VideoPlayer/StreamerVideo'
+import { NavBar } from '../Components/NavBar/NavBar'
+import '../Views/style.css'
 export const Mainpage =() =>{
     const [info,setInfo] = useState([]);
     const [loading,setLoading] = useState(true);
@@ -15,19 +15,18 @@ export const Mainpage =() =>{
         });
     },[]);
     let filter =  info.filter((streamer) => streamer.id === '121059319')
-    //let status = filter[0].is_live === true ? 'En Vivo!' : 'Offline'
     return(
-        <div>
+        <>
             {!loading && (
-        <> <StreamerHeader header = {filter[0].display_name}></StreamerHeader>
-            <StreamerAvatar url = {filter[0].thumbnail_url}></StreamerAvatar>
-            <StreamerStatus status = {filter[0].is_live}></StreamerStatus>
-            <StreamerTitle title = {filter[0].title}></StreamerTitle>
+                <>
+                <NavBar streamername = {filter[0].display_name} image = {filter[0].thumbnail_url } status={filter[0].is_live}></NavBar>
+                &nbsp
+                <StreamerVideo></StreamerVideo>
+                <StreamerTitle title = {filter[0].title}></StreamerTitle>
+                </>
+            )} 
         </>
-            )}
-        </div>
-        
-        
+
     )
 
 }
