@@ -4,8 +4,8 @@
 ![alt text](https://i.imgur.com/e73imQP.jpg)
 
 
-#Tools
-[React JS](https://reactjs.org/)
-[Axios](https://github.com/axios/axios)
-[Twitch API](https://dev.twitch.tv/docs/api/)
+# Tools
+- [React JS](https://reactjs.org/)
+- [Axios](https://github.com/axios/axios)
+- [Twitch API](https://dev.twitch.tv/docs/api/)
 
